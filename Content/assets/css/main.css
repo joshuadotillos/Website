@@ -1269,6 +1269,10 @@ section,
 --------------------------------------------------------------*/
 
 @media (max-width: 768px) {
+  p {
+    font-size: 14px;
+  }
+
   .hero img {
     object-position: 75% center;
   }
@@ -1291,5 +1295,9 @@ section,
 
   .stats .stats-item .purecounter {
     font-size: 36px;
+  }
+
+  li{
+    font-size: 14px;
   }
 }
