@@ -12,7 +12,6 @@ I created this website to have a place where I can show my experience and work o
 - CSS
 - JavaScript
 - Bootstrap
-- Bootstrap Icons
 
 ## How I Built It
 
@@ -23,9 +22,7 @@ I worked on the different sections of the website, including the About, Profile,
 ## Tools
 
 - Visual Studio Code
-- Git
 - GitHub
-- Bootstrap
 
 ## Website
 
