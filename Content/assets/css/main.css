@@ -1,12 +1,12 @@
 /* Fonts */
 :root {
-  --default-font: "Poppins", "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --heading-font: "Raleway",  sans-serif;
-  --nav-font: "Poppins",  sans-serif;
+  --default-font: "Poppins", "Roboto", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Raleway", sans-serif;
+  --nav-font: "Poppins", sans-serif;
 }
 
 /* Root Colors */
-:root { 
+:root {
   --background-color: #ffffff;
   --default-color: #272829;
   --heading-color: #050d18;
@@ -660,8 +660,8 @@ section,
 }
 
 .stats-item .purecounter::after {
-    content: "+";
-    margin-left: 2px;
+  content: "+";
+  margin-left: 2px;
 }
 
 .stats .stats-item p {
@@ -698,16 +698,99 @@ section,
   font-style: normal;
 }
 
+.skills .skill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 9px;
+}
+
+.skills .skill span {
+  font-size: .75rem;
+  font-weight: 500;
+  color: var(--heading-color);
+}
+
+.skills .skill .val {
+  font-size: .75rem;
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* Progress background */
 .skills .progress-bar-wrap {
-  background: color-mix(in srgb, var(--default-color), transparent 90%);
-  height: 10px;
+  position: relative;
+  height: 9px;
+  overflow: hidden;
+  border-radius: 50px;
+
+  background: color-mix(in srgb, var(--default-color), transparent 92%);
 }
 
 .skills .progress-bar {
+  position: relative;
   width: 1px;
+  height: 9px;
+  border-radius: 50px;
+  background: linear-gradient(90deg, #0d8ac7 0%, #149ddd 35%, #35afe7 50%, #149ddd 65%, #0d8ac7 100%);
+  background-size: 200% 100%;
+  background-position: 0% 50%;
+  transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 2px 8px rgba(20, 157, 221, 0.28);
+  animation: skillGradient 4s ease-in-out infinite;
+  overflow: hidden;
+}
+
+@keyframes skillGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.skills .progress-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  animation: skillShine 3s ease-in-out infinite;
+}
+
+@keyframes skillShine {
+  0% {
+    left: -60%;
+  }
+
+  50% {
+    left: 110%;
+  }
+
+  100% {
+    left: 110%;
+  }
+}
+
+.skills .progress-bar::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 10px;
   height: 10px;
-  transition: 0.9s;
-  background-color: var(--accent-color);
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow:0 0 6px rgba(20, 157, 221, 0.8), 0 0 12px rgba(20, 157, 221, 0.45);
 }
 
 /*--------------------------------------------------------------
@@ -883,7 +966,7 @@ section,
   transform: scale(1.1);
 }
 
-.glightbox-clean .gslide-title{
+.glightbox-clean .gslide-title {
   font-family: 'Poppins';
 }
 
@@ -1265,6 +1348,217 @@ section,
 }
 
 /*--------------------------------------------------------------
+# Button Styles Section
+--------------------------------------------------------------*/
+
+.btn-radius {
+  border-radius: 100px !important;
+}
+
+.btn-import {
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-radius: 2px;
+  padding: 13px 28px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.14);
+  text-transform: uppercase;
+  box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.2);
+}
+
+.btn-sm {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 11px 25px;
+}
+
+.btn-lg {
+  padding: 18px 49px;
+}
+
+.btn-xs {
+  font-size: 10px;
+  padding: 8px 14px;
+}
+
+.btn-primary-import {
+  background: #149ddd;
+  background: -moz-linear-gradient(-45deg, #149ddd 0%, #4aaee3 25%, #6bbbe8 50%, #5aaee0 70%, #149ddd 100%);
+  background: -webkit-linear-gradient(-45deg, #149ddd 0%, #4aaee3 25%, #6bbbe8 50%, #5aaee0 70%, #149ddd 100%);
+  background: linear-gradient(-45deg, #149ddd 0%, #4aaee3 25%, #6bbbe8 50%, #5aaee0 70%, #149ddd 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5a7ce2', endColorstr='#575cdb', GradientType=1);
+  background-size: 400% 400%;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  border: medium none;
+  color: white;
+}
+
+.btn-primary-import:hover {
+  color: white;
+}
+
+.btn-secondary-import {
+  background: #797b7f;
+  background: -moz-linear-gradient(-45deg, #797b7f 0%, #b5b8bf 50%, #8e9397 51%, #8e9397 71%, #828589 100%);
+  background: -webkit-linear-gradient(-45deg, #797b7f 0%, #b5b8bf 50%, #8e9397 51%, #8e9397 71%, #828589 100%);
+  background: linear-gradient(135deg, #797b7f 0%, #b5b8bf 50%, #8e9397 51%, #8e9397 71%, #828589 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#797b7f', endColorstr='#828589', GradientType=1);
+  background-size: 400% 400%;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  border: medium none;
+}
+
+.btn-success {
+  background: #05ac50;
+  background: -moz-linear-gradient(-45deg, #05ac50 0%, #21dd72 50%, #05c44e 51%, #05ac50 71%, #05ac50 100%);
+  background: -webkit-linear-gradient(-45deg, #05ac50 0%, #21dd72 50%, #05c44e 51%, #05ac50 71%, #05ac50 100%);
+  background: linear-gradient(135deg, #05ac50 0%, #21dd72 50%, #05c44e 51%, #05ac50 71%, #05ac50 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#05ac50', endColorstr='#05ac50', GradientType=1);
+  background-size: 400% 400%;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  border: medium none;
+}
+
+.btn-danger {
+  background: #e81216;
+  background: -moz-linear-gradient(-45deg, #e81216 0%, #f45355 50%, #f6290c 51%, #ed0e11 71%, #fc1b21 100%);
+  background: -webkit-linear-gradient(-45deg, #e81216 0%, #f45355 50%, #f6290c 51%, #ed0e11 71%, #fc1b21 100%);
+  background: linear-gradient(135deg, #e81216 0%, #f45355 50%, #f6290c 51%, #ed0e11 71%, #fc1b21 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e81216', endColorstr='#fc1b21', GradientType=1);
+  background-size: 400% 400%;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  border: medium none;
+}
+
+.btn-warning {
+  background: #e5ae09;
+  background: -moz-linear-gradient(-45deg, #e5ae09 0%, #ffd044 50%, #ffc107 51%, #fc9014 71%, #f1890b 100%);
+  background: -webkit-linear-gradient(-45deg, #e5ae09 0%, #ffd044 50%, #ffc107 51%, #fc9014 71%, #f1890b 100%);
+  background: linear-gradient(135deg, #e5ae09 0%, #ffd044 50%, #ffc107 51%, #fc9014 71%, #f1890b 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e5ae09', endColorstr='#f1890b', GradientType=1);
+  background-size: 400% 400%;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  border: medium none;
+  color: #fff !important;
+}
+
+.btn-info {
+  background: #01a8c1;
+  background: -moz-linear-gradient(-45deg, #01a8c1 0%, #2adbf7 50%, #00b5d1 51%, #0aafc9 71%, #0599b1 100%);
+  background: -webkit-linear-gradient(-45deg, #01a8c1 0%, #2adbf7 50%, #00b5d1 51%, #0aafc9 71%, #0599b1 100%);
+  background: linear-gradient(135deg, #01a8c1 0%, #2adbf7 50%, #00b5d1 51%, #0aafc9 71%, #0599b1 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#01a8c1', endColorstr='#0599b1', GradientType=1);
+  background-size: 400% 400%;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  border: medium none;
+}
+
+.btn-light {
+  background: #f2f2f2;
+  background: -moz-linear-gradient(-45deg, #f2f2f2 0%, #dddddd 50%, #ffffff 51%, #ffffff 71%, #f6f8fb 100%);
+  background: -webkit-linear-gradient(-45deg, #f2f2f2 0%, #dddddd 50%, #ffffff 51%, #ffffff 71%, #f6f8fb 100%);
+  background: linear-gradient(135deg, #f2f2f2 0%, #dddddd 50%, #ffffff 51%, #ffffff 71%, #f6f8fb 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f2f2f2', endColorstr='#f6f8fb', GradientType=1);
+  color: #3f345f !important;
+  background-size: 400% 400%;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  border: medium none;
+}
+
+.btn-dark {
+  background: #343a40;
+  background: -moz-linear-gradient(-45deg, #343a40 0%, #667584 50%, #4e5256 51%, #242a30 71%, #343a40 100%);
+  background: -webkit-linear-gradient(-45deg, #343a40 0%, #667584 50%, #4e5256 51%, #242a30 71%, #343a40 100%);
+  background: linear-gradient(135deg, #343a40 0%, #667584 50%, #4e5256 51%, #242a30 71%, #343a40 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#343a40', endColorstr='#343a40', GradientType=1);
+  background-size: 400% 400%;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
+  border: medium none;
+}
+
+@-webkit-keyframes AnimationName {
+  0% {
+    background-position: 0% 31%
+  }
+
+  50% {
+    background-position: 100% 70%
+  }
+
+  100% {
+    background-position: 0% 31%
+  }
+}
+
+@-moz-keyframes AnimationName {
+  0% {
+    background-position: 0% 31%
+  }
+
+  50% {
+    background-position: 100% 70%
+  }
+
+  100% {
+    background-position: 0% 31%
+  }
+}
+
+@keyframes AnimationName {
+  0% {
+    background-position: 0% 31%
+  }
+
+  50% {
+    background-position: 100% 70%
+  }
+
+  100% {
+    background-position: 0% 31%
+  }
+}
+
+/*--------------------------------------------------------------
 # Mobile Responsive Section
 --------------------------------------------------------------*/
 
@@ -1277,11 +1571,20 @@ section,
     object-position: 75% center;
   }
 
+  .resume.section {
+    padding: 20px 0px;
+  }
+
+  .btn-import {
+    font-size: 12px;
+    padding: 10px 20px;
+  }
+
   section, .section {
     padding: 0;
   }
 
-  .section-title{
+  .section-title {
     padding-top: 20px;
   }
 
@@ -1289,7 +1592,7 @@ section,
     padding-bottom: 20px;
   }
 
-  .stats{
+  .stats {
     padding-bottom: 20px;
   }
 
@@ -1301,7 +1604,7 @@ section,
     font-size: 36px;
   }
 
-  li{
+  li {
     font-size: 14px;
   }
 }
