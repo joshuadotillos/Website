@@ -301,6 +301,7 @@
    * Stargazing Portfolio Intro
    */
   const intro = document.getElementById('portfolio-intro');
+  const exploreButton = document.getElementById("explore-portfolio");
   const cursorTrail = document.getElementById('cursor-star-trail');
   const starBurst = document.getElementById('star-burst');
 
