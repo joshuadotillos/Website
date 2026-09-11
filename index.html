@@ -28,12 +28,15 @@
 
     <!-- CSS File -->
     <link href="Content/assets/css/main.css" rel="stylesheet">
-    <link href="Content/assets/css/buttons.css" rel="stylesheet">
 </head>
 
 <body class="index-page">
-
     <header id="header" class="header dark-background d-flex flex-column">
+
+        <!-- Audio Sound -->
+        <audio id="backgroundMusic" loop>
+            <source src="./Content/assets/document/audio-sound.mp3" type="audio/mpeg">
+        </audio>
 
         <!-- Stargazing background -->
         <div class="star-field" aria-hidden="true">
@@ -139,6 +142,54 @@
             <div class="cursor-ring"></div>
         </div>
 
+        <!-- Stargazing Intro Overlay -->
+        <div id="portfolio-intro" class="portfolio-intro">
+
+            <!-- Background stars -->
+            <div class="intro-stars" aria-hidden="true">
+                <span class="intro-star intro-star-1"></span>
+                <span class="intro-star intro-star-2"></span>
+                <span class="intro-star intro-star-3"></span>
+                <span class="intro-star intro-star-4"></span>
+                <span class="intro-star intro-star-5"></span>
+                <span class="intro-star intro-star-6"></span>
+                <span class="intro-star intro-star-7"></span>
+                <span class="intro-star intro-star-8"></span>
+                <span class="intro-star intro-star-9"></span>
+                <span class="intro-star intro-star-10"></span>
+                <span class="intro-star intro-star-11"></span>
+                <span class="intro-star intro-star-12"></span>
+                <span class="intro-star intro-star-13"></span>
+                <span class="intro-star intro-star-14"></span>
+                <span class="intro-star intro-star-15"></span>
+                <span class="intro-star intro-star-16"></span>
+                <span class="intro-star intro-star-17"></span>
+                <span class="intro-star intro-star-18"></span>
+                <span class="intro-star intro-star-19"></span>
+                <span class="intro-star intro-star-20"></span>
+                <span class="intro-star intro-star-21"></span>
+                <span class="intro-star intro-star-22"></span>
+                <span class="intro-star intro-star-23"></span>
+                <span class="intro-star intro-star-24"></span>
+            </div>
+
+            <div class="intro-glow" aria-hidden="true"></div>
+            <div class="intro-content">
+                <div class="intro-symbol" aria-hidden="true"> ✦ </div>
+                <span class="intro-welcome"> Welcome to my portfolio </span>
+                <h1>Joshua Dotillos</h1>
+                <p>Full Stack Developer / Software Engineer</p>
+                <button id="explore-portfolio" class="explore-button" type="button">
+                    <span class="button-star" aria-hidden="true">✦</span>
+                    <span class="button-text"> Explore Portfolio </span>
+                    <span class="button-arrow" aria-hidden="true"> → </span>
+                </button>
+            </div>
+
+            <div id="cursor-star-trail" class="cursor-star-trail" aria-hidden="true"></div>
+            <div id="star-burst" class="star-burst" aria-hidden="true"></div>
+        </div>
+
         <!-- Hero Section -->
         <section id="hero" class="hero section dark-background">
 
@@ -156,7 +207,7 @@
         <!-- End Hero Section -->
 
         <!-- About Section -->
-        <section id="about" class="about section">
+        <section id="about" class="about section less-padding-bottom">
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
@@ -231,7 +282,7 @@
         <!-- End About Section -->
 
         <!-- Stats Section -->
-        <section id="stats" class="stats section">
+        <section id="stats" class="stats section less-padding">
 
             <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -665,10 +716,10 @@
 
                     <!-- Portfolio Filters -->
                     <ul class="portfolio-filters isotope-filters" data-aos="fade-up" data-aos-delay="100">
-                        <li data-filter="*" class="filter-active">All</li>
-                        <li data-filter=".filter-backend">Backend</li>
-                        <li data-filter=".filter-frontend">Frontend</li>
-                        <li data-filter=".filter-cms">CMS</li>
+                        <li data-filter="*" class="filter-active circle-wide">All</li>
+                        <li data-filter=".filter-backend" class="circle-wide">Backend</li>
+                        <li data-filter=".filter-frontend" class="circle-wide">Frontend</li>
+                        <li data-filter=".filter-cms" class="circle-wide">CMS</li>
                     </ul>
                     <!-- End Portfolio Filters -->
 
