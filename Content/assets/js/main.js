@@ -306,162 +306,205 @@
   const starBurst = document.getElementById('star-burst');
 
   if (intro && exploreButton) {
-    document.documentElement.classList.add('intro-active');
-    document.body.classList.add('intro-active');
+    const introStorageKey = 'portfolioIntroLastShown';
+    const introDuration = 15 * 60 * 1000; // 30 minutes
 
-    const preventScroll = (event) => {
-      if (document.body.classList.contains('intro-active')) {
-        event.preventDefault();
-      }
-    };
+    const currentPage = window.location.pathname.split('/').pop().toLowerCase();
 
-    window.addEventListener(
-      'wheel',
-      preventScroll,
-      { passive: false }
-    );
+    const detailPages = [
+      'portfolio-details-iras.html',
+      'portfolio-details-wedding.html',
+      'portfolio-details-zag.html'
+    ];
 
-    const preventKeyboardScroll = (event) => {
+    const lastIntroTime = localStorage.getItem(introStorageKey);
 
-      if (!document.body.classList.contains('intro-active')) {
-        return;
-      }
+    const introStillValid =
+      lastIntroTime &&
+      (Date.now() - parseInt(lastIntroTime, 10)) < introDuration;
 
-      const scrollKeys = [
-        ' ',
-        'ArrowUp',
-        'ArrowDown',
-        'PageUp',
-        'PageDown',
-        'Home',
-        'End'
-      ];
+    // Skip intro on detail pages or if shown within 30 minutes
+    if (detailPages.includes(currentPage) || introStillValid) {
 
-      if (scrollKeys.includes(event.key)) {
-        event.preventDefault();
-      }
-    };
+      intro.style.display = 'none';
 
-    window.addEventListener( 'keydown', preventKeyboardScroll );
+    } else {
 
-    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+      document.documentElement.classList.add('intro-active');
+      document.body.classList.add('intro-active');
 
-    let lastTrailTime = 0;
+      const preventScroll = (event) => {
+        if (document.body.classList.contains('intro-active')) {
+          event.preventDefault();
+        }
+      };
 
-    if (!isTouchDevice && cursorTrail) {
-      document.addEventListener('mousemove', (event) => {
+      window.addEventListener(
+        'wheel',
+        preventScroll,
+        { passive: false }
+      );
+
+      const preventKeyboardScroll = (event) => {
 
         if (!document.body.classList.contains('intro-active')) {
           return;
         }
 
-        const now = Date.now();
+        const scrollKeys = [
+          ' ',
+          'ArrowUp',
+          'ArrowDown',
+          'PageUp',
+          'PageDown',
+          'Home',
+          'End'
+        ];
 
-        if (now - lastTrailTime < 45) {
+        if (scrollKeys.includes(event.key)) {
+          event.preventDefault();
+        }
+      };
+
+      window.addEventListener('keydown', preventKeyboardScroll);
+
+      const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+
+      let lastTrailTime = 0;
+
+      if (!isTouchDevice && cursorTrail) {
+        document.addEventListener('mousemove', (event) => {
+
+          if (!document.body.classList.contains('intro-active')) {
+            return;
+          }
+
+          const now = Date.now();
+
+          if (now - lastTrailTime < 45) {
+            return;
+          }
+
+          lastTrailTime = now;
+
+          const star = document.createElement('span');
+
+          star.classList.add('cursor-star');
+
+          if (Math.random() > 0.72) {
+            star.classList.add('white');
+          }
+
+          star.style.left = `${event.clientX}px`;
+          star.style.top = `${event.clientY}px`;
+
+          const driftX = (Math.random() - 0.5) * 35;
+          const driftY = (Math.random() - 0.5) * 35;
+
+          star.style.setProperty('--drift-x', `${driftX}px`);
+          star.style.setProperty('--drift-y', `${driftY}px`);
+
+          const size = Math.random() * 3 + 2;
+
+          star.style.width = `${size}px`;
+          star.style.height = `${size}px`;
+
+          cursorTrail.appendChild(star);
+
+          setTimeout(() => {
+            star.remove();
+          }, 850);
+        });
+      }
+
+      function createStarBurst(x, y) {
+        if (!starBurst) {
           return;
         }
 
-        lastTrailTime = now;
+        const starCount = isTouchDevice ? 8 : 18;
 
-        const star = document.createElement('span');
+        for (let i = 0; i < starCount; i++) {
+          const star = document.createElement('span');
 
-        star.classList.add('cursor-star');
+          star.classList.add('burst-star');
+          star.textContent = Math.random() > 0.65 ? '✦' : '·';
+          star.style.setProperty('--x', `${x}px`);
+          star.style.setProperty('--y', `${y}px`);
 
-        if (Math.random() > 0.72) {
-          star.classList.add('white');
+          const angle = Math.random() * Math.PI * 2;
+          const distance = 60 + Math.random() * 160;
+          const moveX = Math.cos(angle) * distance;
+          const moveY = Math.sin(angle) * distance;
+
+          star.style.setProperty('--move-x', `${moveX}px`);
+          star.style.setProperty('--move-y', `${moveY}px`);
+          star.style.setProperty('--size', `${8 + Math.random() * 12}px`);
+
+          star.style.animationDelay = `${Math.random() * 120}ms`;
+          starBurst.appendChild(star);
+
+          setTimeout(() => {
+            star.remove();
+          }, 1100);
+        }
+      }
+
+      let hasEntered = false;
+
+      function enterPortfolio() {
+        if (hasEntered) {
+          return;
         }
 
-        star.style.left = `${event.clientX}px`;
-        star.style.top = `${event.clientY}px`;
+        hasEntered = true;
 
-        const driftX = (Math.random() - 0.5) * 35;
-        const driftY = (Math.random() - 0.5) * 35;
+        // Remember intro was completed
+        localStorage.setItem(
+          introStorageKey,
+          Date.now().toString()
+        );
 
-        star.style.setProperty('--drift-x', `${driftX}px` );
-        star.style.setProperty('--drift-y', `${driftY}px` );
+        // Play background music
+        const backgroundMusic =
+          document.getElementById('backgroundMusic');
 
-        const size = Math.random() * 3 + 2;
+        if (backgroundMusic) {
+          backgroundMusic.volume = 0.2;
 
-        star.style.width = `${size}px`;
-        star.style.height = `${size}px`;
+          backgroundMusic.play().catch(error => {
+            console.log('Music playback failed:', error);
+          });
+        }
 
-        cursorTrail.appendChild(star);
+        const rect = exploreButton.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
 
-        setTimeout(() => {
-          star.remove();
-        }, 850);
-      });
-    }
+        createStarBurst(centerX, centerY);
 
-    function createStarBurst(x, y) {
-      if (!starBurst) {
-        return;
-      }
-
-      const starCount = isTouchDevice ? 8 : 18;
-
-      for (let i = 0; i < starCount; i++) {
-        const star = document.createElement('span');
-
-        star.classList.add('burst-star');
-        star.textContent = Math.random() > 0.65 ? '✦' : '·';
-        star.style.setProperty('--x', `${x}px` );
-        star.style.setProperty('--y', `${y}px` );
-
-        const angle = Math.random() * Math.PI * 2;
-        const distance = 60 + Math.random() * 160;
-        const moveX = Math.cos(angle) * distance;
-        const moveY = Math.sin(angle) * distance;
-
-        star.style.setProperty('--move-x', `${moveX}px`);
-        star.style.setProperty('--move-y', `${moveY}px`);
-        star.style.setProperty('--size', `${8 + Math.random() * 12}px`);
-
-        star.style.animationDelay = `${Math.random() * 120}ms`;
-        starBurst.appendChild(star);
+        exploreButton.classList.add('explore-clicked');
 
         setTimeout(() => {
-          star.remove();
-        }, 1100);
-      }
-    }
+          intro.classList.add('intro-exit');
+        }, 200);
 
-    let hasEntered = false;
-
-    function enterPortfolio() {
-      if (hasEntered) {
-        return;
+        setTimeout(() => {
+          document.documentElement.classList.remove('intro-active');
+          document.body.classList.remove('intro-active');
+          intro.style.display = 'none';
+        }, 1400);
       }
 
-      hasEntered = true;
+      exploreButton.addEventListener('click', enterPortfolio);
 
-      const rect = exploreButton.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-
-      createStarBurst(centerX, centerY);
-
-      exploreButton.classList.add('explore-clicked');
-
-      setTimeout(() => {
-        intro.classList.add('intro-exit');
-      }, 200);
-
-      setTimeout(() => {
-        document.documentElement.classList.remove('intro-active');
-        document.body.classList.remove('intro-active' );
-        intro.style.display = 'none';
-      }, 1400);
-    }
-
-    exploreButton.addEventListener('click', enterPortfolio);
-    exploreButton.addEventListener('keydown', (event) => {
+      exploreButton.addEventListener('keydown', (event) => {
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
           enterPortfolio();
         }
-      }
-    );
+      });
+    }
   }
 
 })();
