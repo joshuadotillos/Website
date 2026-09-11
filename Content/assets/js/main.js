@@ -219,8 +219,8 @@
   document.addEventListener('scroll', navmenuScrollspy);
 
   /**
- * Custom Cursor
- */
+   * Custom Cursor
+   */
   const cursor = document.querySelector('.custom-cursor');
   const cursorDot = document.querySelector('.cursor-dot');
   const cursorRing = document.querySelector('.cursor-ring');
@@ -261,7 +261,7 @@
 
     // Interactive elements
     const interactiveElements = document.querySelectorAll(
-      'a, button, input, textarea, select, .btn, .navmenu a'
+      'a, button, input, textarea, select, .btn, .navmenu a, .circle-wide'
     );
 
     interactiveElements.forEach((element) => {
@@ -296,4 +296,187 @@
     });
 
   }
+
+  /**
+   * Audio Music
+   */
+  const backgroundMusic = document.getElementById("backgroundMusic");
+  const exploreButton = document.getElementById("explore-portfolio");
+
+  if (backgroundMusic && exploreButton) {
+    backgroundMusic.volume = 0.3;
+    
+    exploreButton.addEventListener("click", function () {
+      backgroundMusic.play().catch(error => {
+        console.log("Music playback failed:", error);
+      });
+    }, { once: true });
+  }
+
+  /**
+   * Stargazing Portfolio Intro
+   */
+  const intro = document.getElementById('portfolio-intro');
+  const cursorTrail = document.getElementById('cursor-star-trail');
+  const starBurst = document.getElementById('star-burst');
+
+  if (intro && exploreButton) {
+    document.documentElement.classList.add('intro-active');
+    document.body.classList.add('intro-active');
+
+    const preventScroll = (event) => {
+      if (document.body.classList.contains('intro-active')) {
+        event.preventDefault();
+      }
+    };
+
+    window.addEventListener(
+      'wheel',
+      preventScroll,
+      { passive: false }
+    );
+
+    const preventKeyboardScroll = (event) => {
+
+      if (!document.body.classList.contains('intro-active')) {
+        return;
+      }
+
+      const scrollKeys = [
+        ' ',
+        'ArrowUp',
+        'ArrowDown',
+        'PageUp',
+        'PageDown',
+        'Home',
+        'End'
+      ];
+
+      if (scrollKeys.includes(event.key)) {
+        event.preventDefault();
+      }
+    };
+
+    window.addEventListener( 'keydown', preventKeyboardScroll );
+
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+
+    let lastTrailTime = 0;
+
+    if (!isTouchDevice && cursorTrail) {
+      document.addEventListener('mousemove', (event) => {
+
+        if (!document.body.classList.contains('intro-active')) {
+          return;
+        }
+
+        const now = Date.now();
+
+        if (now - lastTrailTime < 45) {
+          return;
+        }
+
+        lastTrailTime = now;
+
+        const star = document.createElement('span');
+
+        star.classList.add('cursor-star');
+
+        if (Math.random() > 0.72) {
+          star.classList.add('white');
+        }
+
+        star.style.left = `${event.clientX}px`;
+        star.style.top = `${event.clientY}px`;
+
+        const driftX = (Math.random() - 0.5) * 35;
+        const driftY = (Math.random() - 0.5) * 35;
+
+        star.style.setProperty('--drift-x', `${driftX}px` );
+        star.style.setProperty('--drift-y', `${driftY}px` );
+
+        const size = Math.random() * 3 + 2;
+
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+
+        cursorTrail.appendChild(star);
+
+        setTimeout(() => {
+          star.remove();
+        }, 850);
+      });
+    }
+
+    function createStarBurst(x, y) {
+      if (!starBurst) {
+        return;
+      }
+
+      const starCount = isTouchDevice ? 8 : 18;
+
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement('span');
+
+        star.classList.add('burst-star');
+        star.textContent = Math.random() > 0.65 ? '✦' : '·';
+        star.style.setProperty('--x', `${x}px` );
+        star.style.setProperty('--y', `${y}px` );
+
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 60 + Math.random() * 160;
+        const moveX = Math.cos(angle) * distance;
+        const moveY = Math.sin(angle) * distance;
+
+        star.style.setProperty('--move-x', `${moveX}px`);
+        star.style.setProperty('--move-y', `${moveY}px`);
+        star.style.setProperty('--size', `${8 + Math.random() * 12}px`);
+
+        star.style.animationDelay = `${Math.random() * 120}ms`;
+        starBurst.appendChild(star);
+
+        setTimeout(() => {
+          star.remove();
+        }, 1100);
+      }
+    }
+
+    let hasEntered = false;
+
+    function enterPortfolio() {
+      if (hasEntered) {
+        return;
+      }
+
+      hasEntered = true;
+
+      const rect = exploreButton.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+
+      createStarBurst(centerX, centerY);
+
+      exploreButton.classList.add('explore-clicked');
+
+      setTimeout(() => {
+        intro.classList.add('intro-exit');
+      }, 200);
+
+      setTimeout(() => {
+        document.documentElement.classList.remove('intro-active');
+        document.body.classList.remove('intro-active' );
+        intro.style.display = 'none';
+      }, 1400);
+    }
+
+    exploreButton.addEventListener('click', enterPortfolio);
+    exploreButton.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          enterPortfolio();
+        }
+      }
+    );
+  }
+
 })();
