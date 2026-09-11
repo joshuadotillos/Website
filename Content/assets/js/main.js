@@ -298,22 +298,6 @@
   }
 
   /**
-   * Audio Music
-   */
-  const backgroundMusic = document.getElementById("backgroundMusic");
-  const exploreButton = document.getElementById("explore-portfolio");
-
-  if (backgroundMusic && exploreButton) {
-    backgroundMusic.volume = 0.3;
-    
-    exploreButton.addEventListener("click", function () {
-      backgroundMusic.play().catch(error => {
-        console.log("Music playback failed:", error);
-      });
-    }, { once: true });
-  }
-
-  /**
    * Stargazing Portfolio Intro
    */
   const intro = document.getElementById('portfolio-intro');
