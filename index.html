@@ -34,36 +34,110 @@
 <body class="index-page">
 
     <header id="header" class="header dark-background d-flex flex-column">
-        <i class="header-toggle d-xl-none bi bi-list"></i>
 
-        <div class="profile-img">
-            <img src="Content/assets/img/my-profile-img.jpg" alt="" class="img-fluid rounded-circle">
+        <!-- Stargazing background -->
+        <div class="star-field" aria-hidden="true">
+            <span class="star star-1"></span>
+            <span class="star star-2"></span>
+            <span class="star star-3"></span>
+            <span class="star star-4"></span>
+            <span class="star star-5"></span>
+            <span class="star star-6"></span>
+            <span class="star star-7"></span>
+            <span class="star star-8"></span>
+            <span class="star star-9"></span>
+            <span class="star star-10"></span>
+            <span class="star star-11"></span>
+            <span class="star star-12"></span>
+            <span class="star star-13"></span>
+            <span class="star star-14"></span>
+            <span class="star star-15"></span>
+            <span class="star star-16"></span>
+            <span class="star star-17"></span>
+            <span class="star star-18"></span>
+            <span class="star star-19"></span>
+            <span class="star star-20"></span>
         </div>
 
-        <a href="index.html" class="logo d-flex align-items-center justify-content-center">
-            <h1 class="sitename">Joshua Dotillos</h1>
-        </a>
+        <!-- Header content -->
+        <div class="header-content">
+            <i class="header-toggle d-xl-none bi bi-list"></i>
+            <div class="profile-img">
+                <img src="Content/assets/img/my-profile-img.jpg" alt="Joshua Dotillos" class="img-fluid rounded-circle">
+            </div>
 
-        <div class="social-links text-center">
-            <a href="https://github.com/joshuadotillos" class="github"><i class="bi bi-github"></i></a>
-            <a href="https://www.linkedin.com/in/joshuadotillos/" class="linkedin"><i class="bi bi-linkedin"></i></a>
-            <a href="mailto:dotillos.joshuaandreinicolai@gmail.com" class="linkedin"><i class="bi bi-envelope"></i></a>
+            <a href="index.html" class="logo d-flex align-items-center justify-content-center">
+                <h1 class="sitename">Joshua Dotillos</h1>
+            </a>
+
+            <div class="social-links text-center">
+                <a href="https://github.com/joshuadotillos" class="github" aria-label="GitHub">
+                    <i class="bi bi-github"></i>
+                </a>
+
+                <a href="https://www.linkedin.com/in/joshuadotillos/" class="linkedin" aria-label="LinkedIn">
+                    <i class="bi bi-linkedin"></i>
+                </a>
+
+                <a href="mailto:dotillos.joshuandreinicolai@gmail.com" class="email" aria-label="Email">
+                    <i class="bi bi-envelope"></i>
+                </a>
+            </div>
+
+            <nav id="navmenu" class="navmenu">
+                <ul>
+                    <li>
+                        <a href="#hero" class="active">
+                            <i class="bi bi-house navicon"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#about">
+                            <i class="bi bi-person navicon"></i>
+                            <span>About</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#resume">
+                            <i class="bi bi-file-earmark-text navicon"></i>
+                            <span>Resume</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#portfolio">
+                            <i class="bi bi-images navicon"></i>
+                            <span>Portfolio</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#services">
+                            <i class="bi bi-hdd-stack navicon"></i>
+                            <span>Services</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#contact">
+                            <i class="bi bi-envelope navicon"></i>
+                            <span>Contact</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
         </div>
-
-        <nav id="navmenu" class="navmenu">
-            <ul>
-                <li><a href="#hero" class="active"><i class="bi bi-house navicon"></i>Home</a></li>
-                <li><a href="#about"><i class="bi bi-person navicon"></i> About</a></li>
-                <li><a href="#resume"><i class="bi bi-file-earmark-text navicon"></i> Resume</a></li>
-                <li><a href="#portfolio"><i class="bi bi-images navicon"></i> Portfolio</a></li>
-                <li><a href="#services"><i class="bi bi-hdd-stack navicon"></i> Services</a></li>
-                <li><a href="#contact"><i class="bi bi-envelope navicon"></i> Contact</a></li>
-            </ul>
-        </nav>
-
     </header>
 
     <main class="main">
+
+        <div class="custom-cursor">
+            <div class="cursor-dot"></div>
+            <div class="cursor-ring"></div>
+        </div>
 
         <!-- Hero Section -->
         <section id="hero" class="hero section dark-background">
@@ -131,9 +205,6 @@
                                     <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>Bachelor of
                                             Science in
                                             Information Technology</span></li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Email:</strong>
-                                        <span>dotillos.joshuaandreinicolai@gmail.com</span>
-                                    </li>
                                 </ul>
                             </div>
                             <div class="col-lg-6">
@@ -143,9 +214,6 @@
                                             SQL</span></li>
                                     <li><i class="bi bi-chevron-right"></i> <strong>Current Role:</strong>
                                         <span>Software Engineer</span>
-                                    </li>
-                                    <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong>
-                                        <span>Available</span>
                                     </li>
                                 </ul>
                             </div>
@@ -565,14 +633,17 @@
             <!-- Section Title -->
             <div class="container section-title resume-bottom" data-aos="fade-up">
                 <h2>Resume</h2>
-                <p>Curious about my experience and what I can bring to a team? Take a look at my resume for a quick overview of my professional journey, 
-                    technical skills, and the projects I’ve worked on as a Full Stack Developer / Software Engineer / Backend Developer.</p>
+                <p>Curious about my experience and what I can bring to a team? Take a look at my resume for a quick
+                    overview of my professional journey,
+                    technical skills, and the projects I’ve worked on as a Full Stack Developer / Software Engineer /
+                    Backend Developer.</p>
             </div>
             <!-- End Section Title -->
 
             <div class="container">
-                <a class="btn-import btn-primary-import btn-radius" href="../Website/Content/assets/document/Joshua Dotillos - Resume.pdf" 
-                    role="button" target="_blank">View my Resume</a>
+                <a class="btn-import btn-primary-import btn-radius"
+                    href="../Website/Content/assets/document/Joshua Dotillos - Resume.pdf" role="button"
+                    target="_blank">View my Resume</a>
             </div>
 
         </section>
